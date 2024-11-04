@@ -1,0 +1,74 @@
+main_view.py 
+
+import yfinance as yf      # 추가
+import numpy as np
+import torch
+import joblib
+from datetime import datetime, timedelta
+import torch.nn as nn
+------------------------------------------------------
+# LSTM 모델 정의   # 추가 
+class LSTM(nn.Module):
+    def __init__(self):
+        super(LSTM, self).__init__()
+        self.lstm1 = nn.LSTM(input_size=1, hidden_size=128, batch_first=True)
+        self.lstm2 = nn.LSTM(input_size=128, hidden_size=64, batch_first=True)
+        self.dense1 = nn.Linear(64, 25)
+        self.dense2 = nn.Linear(25, 1)
+
+    def forward(self, x):
+        out, _ = self.lstm1(x)
+        out, _ = self.lstm2(out)
+        out = self.dense1(out[:, -1, :])
+        out = self.dense2(out)
+        return out
+
+# 모델과 스케일러 불러오기
+def load_model_and_scaler(model_path='./DBWEB/lstm_model.pth', scaler_path='./DBWEB/scaler.pkl'):
+    model = LSTM()
+    model.load_state_dict(torch.load(model_path,weights_only=True))
+    model.eval()
+    scaler = joblib.load(scaler_path)
+    return model, scaler
+
+# 다음 날 예측 함수
+def predict_next_day(model, scaler, ticker, prediction_date):
+    end_date = prediction_date
+    start_date = end_date - timedelta(days=100)
+
+    data = yf.download(ticker, start=start_date, end=end_date, interval='1d')
+    data = data[['Close']]
+    dataset = data.values
+
+    scaled_data = scaler.transform(dataset)
+    last_60_days = scaled_data[-60:]
+    next_day_input = last_60_days.reshape((1, 60, 1))
+
+    with torch.no_grad():
+        next_day_prediction = model(torch.FloatTensor(next_day_input))
+
+    next_day_prediction = scaler.inverse_transform(next_day_prediction.numpy())
+    return next_day_prediction[0][0]
+
+------------------------------------------
+@mainBP.route("/AP", methods=['GET', 'POST'])   # 고치기!!
+def APindex():
+    all_data = AP_Preds.query.all()   # 모든 데이터.
+    ap_filtered_data = None  # 초기화
+
+    predicted_value = None # 추가 
+    
+    if request.method == 'POST':
+        selected_date = request.form.get('date')  # 선택한 날짜 #추가 get
+        # 선택한 날짜에 해당하는 데이터 필터링
+
+        if selected_date: #추가
+            prediction_date = datetime.strptime(selected_date, '%Y-%m-%d') # 추가 
+
+            model, scaler = load_model_and_scaler() #추가  
+		# 각자 불러올때 저장한 모델 이름으로 또한 데이터 이름으로 	model_path='./DBWEB/XXX.pth'이런 식으로 이름 바꿔주기	   		
+            predicted_value = predict_next_day(model, scaler, 'AAPL', prediction_date) # 추가  APPL 말고 각자 데이터 이름으로 GOOGL,NF
+
+            ap_filtered_data = [data for data in all_data if str(data.Date) == selected_date] # 뒤로 밀기
+
+    return render_template("AP.html", all_data=all_data, filtered_data=ap_filtered_data,predicted_value=predicted_value) # 추가

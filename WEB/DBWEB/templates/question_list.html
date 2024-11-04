@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a {font-style: none;
+            text-decoration-line: none;}
+    </style>
+</head>
+<body>
+    <h1>질문 게시판</h1>
+    <!-- 몇개가 올 지 모름. 1개만 들어올 수도 있고 나중에 10개로 늘어날 수 도 있지. 그러니 반복문을 써야함. 책 69~70p 참고-->
+     
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>날짜</th>
+        </tr>
+
+        
+        {% if question_list %}
+        {% for question in question_list %}
+        <tr>
+             
+                <!--/qdetail/<int:qid>-->
+            <!-- <a src="http://127.0.0.1:5000/qdetail/1"> -->
+                <td>{{question.id}} </td>          
+                <td>
+                    <a href="../qdetail/{{question.id}}">{{question.subject}}</a>
+                </td>
+                <td>{{question.create_date}}</td>
+        </tr>
+        {% endfor %}
+    
+        {% else %}
+        <tr>
+            <td class="msg" colspan="3">등록된 질문이 없습니다.</td>
+        </tr>
+        {% endif %}
+    </table>
+    <br><br>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyWeb</title>
+</head>
+<body>
+    <h1>{{question.subject}}</h1>
+
+    <div>
+        {{question.content}}
+    </div>
+
+    <h5>{{question.answer_set|length}}개의 답변이 있습니다.</h5>
+    <div>
+        <ul>
+            {%for answer in question.answer_set %}
+            <li>{{answer.content}}</li>
+            {% endfor%}
+        </ul>
+    <!-- </div> -->
+    </div>
+
+    <!-- <div id="qDiv"> -->
+        <!-- 몇개가 올 지 모름. 1개만 들어올 수도 있고 나중에 10개로 늘어날 수 도 있지. 그러니 반복문을 써야함. 책 69~70p 참고 -->
+        <!-- <label>제목 : </label> -->
+        <!-- {{question.subject}}<br>    main.view의 questionItem - question과 동일한 부분 -->
+        <!-- <label>내용:</label> -->
+        <!-- {{question.content}}<br> -->
+    <!-- </div> -->
+    
+    <!-- 책 79페이지 참고해서 제작. 1023 숙제 -->
+    <div>
+
+        <form action="{{url_for('answer.create', question_id=question.id)}}" method="post">
+            <textarea name="content" id="content" row="15" placeholder="답글 입력"></textarea>
+            <input type="submit" value="답변등록">
+        </form>
+    </div>
+    
+</body>
+</html>
+
+
+
+
+

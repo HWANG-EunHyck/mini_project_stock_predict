@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <!-- filename을 빼먹었었따. 기억ㅇ할 것. -->
+</head>
+<body>
+    <h1>불지옥 개발자의 주식장</h1>
+
+    <!--  애플 구글 디즈니 넷플릭스 Go 버튼 탭 (반고정) -->
+    <div class="menu" >
+        <nav class="clearfix">
+        <ul class="clearfix">
+            <li><a href="{{url_for('main_view.index')}}">Main</a></li>
+            <li class="selected"><a href="{{url_for('main_view.Aboutindex')}}" class="selected_font">About</a></li>
+            <li><a href="{{url_for('main_view.APindex')}}">Apple</a></li> <!--""<-여기 부분에 URL 작성하면 됨-->
+            <li><a href="{{url_for('main_view.GGindex')}}">Google</a></li>
+            <li><a href="{{url_for('main_view.NFindex')}}">NetFlix</a></li>
+            <li><a href="{{url_for('main_view.Goldindex')}}">Gold</a></li>
+        </ul>
+        <a id="pull" href="#"></a>
+        </nav>
+    </div>
+    <br><br><br>
+
+    <div class="bottom_tab">
+        <h2>
+            주제 선정 이유
+        </h2>
+        <p> 주식으로 성공하고 싶은자, 황대표를 따르라. </p>
+        <p> 단, 책임지지 않음 </p>
+
+        <h2>데이터셋</h2>
+        <table> 
+            <td>
+                <img src="{{url_for('static',filename='images/yahoo_logo.png')}}">
+                <p>&emsp;야후에서 제공하는 주식정보 제공 API&emsp;</p>
+            </td>
+            <td>
+                <p></p>
+            </td>
+            <td>
+                
+                <img src="{{url_for('static',filename='images/DataFrame.png')}}" height ="250px" >
+            </td>
+
+
+        </table>
+            <!-- &nbsp; 작게 띄워쓰기
+            &ensp; 보통
+            &emsp;크게 -->
+
+       
+        <!-- /*폐기. 어떻게 써야할지 모르겠다.*/ -->
+        <!-- <div class="box1">
+                <img src="{{url_for('static',filename='images/yahoo_logo.png')}}" width="100%">
+                <p>야후에서 제공하는 주식정보 제공 API</p>
+        </div>
+
+        <div class="box2">
+            <img src="{{url_for('static',filename='images/DataFrame.png')}}"  height ="250px" >
+        </div> -->
+    
+        
+
+    </div>
+
+
+
+  
+
+
+    
+
+    <!--  -->
+</body>
+</html>

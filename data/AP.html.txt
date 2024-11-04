@@ -1,0 +1,45 @@
+AP.html
+
+버튼설정부분 --------------------------------------------------
+
+    <div class="menu" >
+        <nav class="clearfix">
+        <ul class="clearfix">
+            <li><a href="{{url_for('main_view.index')}}">Main</a></li>
+            <li><a href="{{url_for('main_view.Aboutindex')}}">About</a></li>
+            <li class = "selected"><a href="{{url_for('main_view.APindex')}}"  class="selected_font">Apple</a></li> <!--""<-여기 부분에 URL 작성하면 됨-->
+            <li><a href="{{url_for('main_view.GGindex')}}">Google</a></li>
+            <li><a href="{{url_for('main_view.NFindex')}}">NetFlix</a></li>
+            <li><a href="{{url_for('main_view.Goldindex')}}">Gold</a></li>
+        </ul>
+        <a id="pull" href="#"></a>
+        </nav>
+결과값 나오는 부분 ----------------------------------
+
+     <div id="main_content">
+        <br>
+    <p> 주말은 없습니다 </p>
+    <!-- 라디오 버튼, 날짜 입력. DB 연동해서 날짜 입력하면 모델에 넣고 돌아감 -->
+    <form method= 'POST'>
+        <label for="date">날짜 선택:</label>
+        <input type="date" id="date" name="date" required>
+        <button type="submit">데이터 가져오기</button>
+<!-- 바로 오른쪽에 모델 예측값 출력 -->
+        <p>예측 주식값 :
+
+            {% if filtered_data and filtered_data|length > 0 %} 
+                {{ filtered_data[0].predicted }}  <!-- 첫 번째 요소의 predicted 값 출력 -->
+            {% else %}
+                데이터가 없습니다.
+            {% endif %} 
+        </p>
+        <br>    ### 이부분 추가
+
+        <p>예측 주식값:                                    
+            {% if predicted_value is not none %} 
+                {{ predicted_value }}  <!-- 예측값 출력 -->
+            {% else %}
+                데이터가 없습니다.
+            {% endif %}    
+        </p>
+    </form>

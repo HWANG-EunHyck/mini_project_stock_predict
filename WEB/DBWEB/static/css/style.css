@@ -1,0 +1,160 @@
+body {
+    /* background-image: url('static/images/불지옥.jpg'); */
+    /* background-image: "{{url_for('static',filename='images/firehelll.jpg')}}"; */
+    background-image: url("/static/images/fire_5.png");
+    background-size : cover;
+    text-align: center; 
+    /* width: 100%; */
+}
+
+
+/*About의 설명을 위한 칸 좌우 두 박스*/
+.box1 {
+  /* margin-right:10px; */
+  float:left; 
+  width:200px; 
+  height:100px; 
+  /* background-color:#234234; */
+}
+  
+.box2 {
+  display:inline-block; 
+  width:200px; 
+  height:100px; 
+  /* background-color:#666666;  */
+  margin-left:10px;}  
+
+
+
+
+
+
+#main_content {
+    margin-left:auto; 
+    margin-right:auto;
+    /* margin-top : 15px;
+    margin-bottom : 15px; */
+    
+    background-color: white;
+    width : 90%;
+    height: 120%;
+}
+
+
+h1 {
+    font-size: 40px;
+    margin-left:auto; 
+    margin-right:auto;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    width : 600px;
+}
+
+#UpperTab {
+    text-align: center; 
+    margin-left:auto; 
+    margin-right:auto;
+    margin:auto; 
+}
+
+.main_image{
+  height: 500px;
+}
+
+
+.bottom_tab {
+  text-align: center; 
+  margin-left:auto; 
+  margin-right:auto;
+
+  background-color: white;
+  width: 80%;
+}
+
+table {
+  text-align: center; 
+  margin-left:auto; 
+  margin-right:auto;
+}
+
+
+/*상단탭 부분;*/
+
+nav{
+    font-size: 12pt;
+    font-family: 'PT Sans', Arial, Sans-serif;
+    position: relative;
+}
+nav ul{
+    padding: 0;
+    margin: 0 auto;
+    width: auto;
+}
+nav a{
+    line-height: 50px;
+  height: 50px;
+}
+nav li a{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+nav li:last-child a{
+    border-right: 0;
+    }
+nav a#pull{
+    display: none;
+}
+  ul{
+    /*list-style-type: none;*/
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    text-align: center;
+  }
+
+.selected  {/*list-style-type: none;*/
+  margin: 0;
+  padding: 0;
+  background-color: darkgray;
+  text-align: center;
+}
+
+
+
+  li{
+    /*position: relative;*/
+    display: inline-block;
+  }
+
+/*상단 메뉴바 안에 글자*/
+  li a{ 
+    color: #FFFFFF;
+    text-align: center;
+    padding: 14.5px 16px;
+    text-decoration: none;
+  }
+
+  .selected_font {
+    color: black;
+    text-align: center;
+    padding: 14.5px 16px;
+    text-decoration: none;
+  }
+
+  .menu { 
+    /* 상단 메뉴바 위에 */
+   width : 1400px;
+   height: 50px;
+   text-align: center;
+   background-position: center;
+   background-size: cover;
+   background-color: #333333; 
+   color: white;
+   position: absolute;
+   z-index: 1;
+   
+   /* 중앙 정렬*/
+   left: 50%;
+   transform: translateX(-50%);
+ }

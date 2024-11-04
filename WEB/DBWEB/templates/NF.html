@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <!-- filename을 빼먹었었따. 기억ㅇ할 것. -->
+</head>
+<body>
+    <h1>불지옥 개발자의 주식장</h1>
+
+    <!--  애플 구글 디즈니 넷플릭스 Go 버튼 탭 (반고정) -->
+    <div class="menu" >
+        <nav class="clearfix">
+            <ul class="clearfix">
+                <li><a href="{{url_for('main_view.index')}}">Main</a></li>
+                <li><a href="{{url_for('main_view.Aboutindex')}}">About</a></li>
+                <li><a href="{{url_for('main_view.APindex')}}">Apple</a></li> <!--""<-여기 부분에 URL 작성하면 됨-->
+                <li><a href="{{url_for('main_view.GGindex')}}">Google</a></li>
+                <li class = "selected"><a href="{{url_for('main_view.NFindex')}}"  class="selected_font">NetFlix</a></li>
+                <li><a href="{{url_for('main_view.Goldindex')}}">Gold</a></li>
+            </ul>
+        <a id="pull" href="#"></a>
+        </nav>
+    </div>
+    <br><br><br>
+
+
+    <!-- 주식 그래프 나오는 곳 , 이미지 링크, 우리 나온 결과값 -->
+    <div>
+        <img src="{{url_for('static',filename='images/EH_NFLX.png')}}" class = "main_image"><br>
+    </div>
+
+    <br>
+    <div id="main_content">
+        <br>
+
+    <!-- 라디오 버튼, 날짜 입력. DB 연동해서 날짜 입력하면 모델에 넣고 돌아감 -->
+        <form method= 'POST'>
+            <label for="date">날짜 선택:</label>
+            <input type="date" id="date" name="date" required>
+            <button type="submit">데이터 가져오기</button>
+    <!-- 바로 오른쪽에 모델 예측값 출력 -->
+            <p>예측 주식값 :
+
+                {% if filtered_data and filtered_data|length > 0 %} 
+                    {{ filtered_data[0].predicted }}  <!-- 첫 번째 요소의 predicted 값 출력 -->
+                {% else %}
+                    데이터가 없습니다.
+                {% endif %} 
+            </p>
+        </form>
+
+
+        <br>     <br>
+        <p>
+
+        </p>
+        <br>
+
+
+    <!-- 댓글탭 / 각 항목 별 전용 댓글탭 -->
+        <div>
+            <ul>
+            </ul>
+        </div>
+    </div>
+
+  
+
+
+    
+
+    <!--  -->
+</body>
+</html>
